@@ -1,9 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { CONSULTANT_OPTIONS } from "../../constants/technicalEvaluation.constant";
+import { FirebaseService } from "../../services/firebase.service";
 import { technicalEvaluationFormSchema } from "../../validation/technicalEvaluationForm.schema";
 import AddressDetailsForm from "../AddressDetailsForm/AddressDetailsForm";
 import Button from "../Button/Button";
@@ -13,6 +15,7 @@ import ExperienceDetailsForm from "../ExperienceDetailsForm/ExperienceDetailsFor
 import FamilyDetailsForm from "../FamilyDetailsForm/FamilyDetailsForm";
 import PersonalDetailsForm from "../PersonalDetailsForm/PersonalDetailsForm";
 import UploadDocumentsForm from "../UploadDocumentsForm/UploadDocumentsForm";
+const fireBaseService = new FirebaseService();
 const TechnicalEvaluationForm = () => {
   const methods = useForm<{
     [x: string]: any;
@@ -23,22 +26,26 @@ const TechnicalEvaluationForm = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const [number, setNumber] = useState("");
   const onSubmit = async (data: any) => {
     try {
       setLoading(true);
-
+      const res = await fireBaseService.addRecord("evaluationForm", data);
       toast.success(`Successfully!!`);
       setLoading(false);
     } catch (error) {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    console.log(number, "-askdjhgfjsadgjh");
+  }, [number]);
 
   return (
     <div className="container-fluid p-4 bg-light">
       <div className="mt-1">
         <h1>Technical Evaluation Form</h1>
+
         <div className="container-fluid text-start">
           <h2>Consider all of your Immigration options</h2>
           <p>
@@ -55,8 +62,7 @@ const TechnicalEvaluationForm = () => {
             <input
               type="radio"
               value="a"
-              name={`evaluationFormType`}
-              {...methods.register}
+              {...methods.register("evaluationFormType")}
             />
             <label className="ms-2">
               General Immigration (This form is for professionals and workers.)
@@ -66,8 +72,7 @@ const TechnicalEvaluationForm = () => {
             <input
               type="radio"
               value="b"
-              name={`evaluationFormType`}
-              {...methods.register}
+              {...methods.register("evaluationFormType")}
             />
             <label className="ms-2">
               Business Immigration (This form is for individuals with management
@@ -78,14 +83,19 @@ const TechnicalEvaluationForm = () => {
             <input
               type="radio"
               value="c"
-              name={`evaluationFormType`}
-              {...methods.register}
+              {...methods.register("evaluationFormType")}
             />
             <label className="ms-2">
               Family Sponsorship (This form is for sponsorship of a
               Spouse/Common-Law Partner and/or Dependent Children.)
             </label>
           </div>
+          {methods.formState.errors?.evaluationFormType && (
+            <span className={`text-danger`}>
+              {(methods.formState.errors?.evaluationFormType
+                ?.message as string) || ""}
+            </span>
+          )}
         </div>
         <div className="container-fluid text-start mt-3 mb-4">
           <h4>Consultant Details</h4>
@@ -95,6 +105,9 @@ const TechnicalEvaluationForm = () => {
               label=""
               controlName="consultant"
               control={methods.control}
+              errorMessage={
+                (methods.formState.errors?.consultant?.message as string) || ""
+              }
             ></DropDown>
           </div>
         </div>
@@ -133,6 +146,7 @@ const TechnicalEvaluationForm = () => {
             label="Continue"
             disabled={loading}
             buttonClass="btn btn-primary"
+            onClick={() => console.log("jhsdagf---", methods.formState.errors)}
           />
         </div>
       </form>

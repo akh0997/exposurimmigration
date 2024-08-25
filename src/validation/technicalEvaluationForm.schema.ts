@@ -4,7 +4,7 @@ import { ObjectSchema } from "yup";
 export const technicalEvaluationFormSchema: ObjectSchema<{ [x: string]: any }> =
   yup.object({
     evaluationFormType: yup.string().required("Please select an option"),
-    consultant: yup.string().required("Please select an option"),
+    consultant: yup.string().required("Please select Consultant"),
     personalDetails: yup.object({
       firstName: yup.string().required("Please enter First name"),
       lastName: yup.string().required("Please enter Last name"),

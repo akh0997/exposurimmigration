@@ -8,7 +8,7 @@ const DropDown = ({
   customClass,
   dropDownClass,
 }: {
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; icon?: string }[];
   control: any;
   label: string;
   controlName: string;
@@ -29,6 +29,9 @@ const DropDown = ({
             onChange={onChange}
             value={value}
           >
+            <option disabled selected>
+              Select
+            </option>
             {options.map((option) => (
               <option value={option.value} key={option.value}>
                 {option.label}

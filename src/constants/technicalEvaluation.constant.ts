@@ -70,9 +70,11 @@ export const COUNTRY_CODE = [
   {
     value: "+1",
     label: "(+1) United State",
+    icon: "http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg",
   },
   {
     value: "+91",
     label: "(+91) India",
+    icon: "http://purecatamphetamine.github.io/country-flag-icons/3x2/IN.svg",
   },
 ];

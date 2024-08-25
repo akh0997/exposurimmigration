@@ -5,6 +5,7 @@ import {
   QUALIFICATION_TYPE_OPTION,
   YES_NO_OPTION,
 } from "../../constants/technicalEvaluation.constant";
+import { InputType } from "../../enums/Input.enum";
 import DropDown from "../DropDown/DropDown";
 import Input from "../Input/Input";
 
@@ -58,7 +59,7 @@ const FamilyDetailsForm = () => {
             <div className="col-lg-3 col-md-6 col-sm-12">
               {" "}
               <Input
-                type="text"
+                type={InputType.Text}
                 label="Course Name"
                 controlName="familyDetails.spouseQualification.courseName"
                 register={register}
@@ -83,7 +84,8 @@ const FamilyDetailsForm = () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12">
               <Input
-                type="text"
+                type={InputType.Numeric}
+                control={control}
                 label="Passing Year"
                 controlName="familyDetails.spouseQualification.passingYear"
                 register={register}
@@ -99,7 +101,8 @@ const FamilyDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             {" "}
             <Input
-              type="text"
+              type={InputType.Numeric}
+              control={control}
               label="Number Of Kids"
               controlName="familyDetails.numberOfKids"
               register={register}
@@ -123,33 +126,36 @@ const FamilyDetailsForm = () => {
             ></DropDown>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-12">
-            <Input
-              type="text"
-              label="Relation"
-              controlName="familyDetails.relation"
-              register={register}
-              errorMessage={
-                ((errors?.familyDetails as any)?.relation?.message as string) ||
-                ""
-              }
-            />
+        {watch("familyDetails.relativeInCountry") ===
+          YES_NO_OPTION[0].value && (
+          <div className="row">
+            <div className="col-lg-6 col-md-6 col-sm-12">
+              <Input
+                type={InputType.Text}
+                label="Relation"
+                controlName="familyDetails.relation"
+                register={register}
+                errorMessage={
+                  ((errors?.familyDetails as any)?.relation
+                    ?.message as string) || ""
+                }
+              />
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-12">
+              {" "}
+              <Input
+                type={InputType.Text}
+                label="RelativeEvaluation"
+                controlName="familyDetails.relativeEvaluation"
+                register={register}
+                errorMessage={
+                  ((errors?.familyDetails as any)?.relativeEvaluation
+                    ?.message as string) || ""
+                }
+              />
+            </div>
           </div>
-          <div className="col-lg-6 col-md-6 col-sm-12">
-            {" "}
-            <Input
-              type="text"
-              label="RelativeEvaluation"
-              controlName="familyDetails.relativeEvaluation"
-              register={register}
-              errorMessage={
-                ((errors?.familyDetails as any)?.relativeEvaluation
-                  ?.message as string) || ""
-              }
-            />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

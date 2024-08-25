@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { COUNTRY_CODE, YES_NO_OPTION } from "../../constants/technicalEvaluation.constant";
+import { COUNTRY_CODE } from "../../constants/technicalEvaluation.constant";
+import { InputType } from "../../enums/Input.enum";
 import DropDown from "../DropDown/DropDown";
 import Input from "../Input/Input";
 import style from "./PersonalDetailsForm.module.scss";
@@ -22,7 +23,7 @@ const PersonalDetailsForm = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Text}
               label="First Name"
               controlName="personalDetails.firstName"
               register={register}
@@ -34,7 +35,7 @@ const PersonalDetailsForm = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Text}
               label="Last Name"
               controlName="personalDetails.lastName"
               register={register}
@@ -48,7 +49,7 @@ const PersonalDetailsForm = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="Date"
+              type={InputType.Date}
               label="Date Of Birth"
               controlName="personalDetails.dateOfBirth"
               register={register}
@@ -65,7 +66,7 @@ const PersonalDetailsForm = () => {
                 <DropDown
                   options={COUNTRY_CODE}
                   label=""
-                  controlName="familyDetails.relativeInCountry"
+                  controlName="personalDetails.countryCode"
                   control={control}
                   dropDownClass={`${style.no_border_radius_right}`}
                   errorMessage={
@@ -76,7 +77,7 @@ const PersonalDetailsForm = () => {
               </div>
               <div className="col-lg-9 col-md-8 col-sm-10 ps-0 rounded-end">
                 <Input
-                  type="text"
+                  type={InputType.Text}
                   label=""
                   controlName="personalDetails.phoneNo"
                   customClass={`${style.no_border_radius_left}`}
@@ -93,7 +94,7 @@ const PersonalDetailsForm = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Text}
               label="Father Name"
               controlName="personalDetails.fatherName"
               register={register}
@@ -105,7 +106,7 @@ const PersonalDetailsForm = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Text}
               label="Email"
               controlName="personalDetails.email"
               register={register}
@@ -119,7 +120,8 @@ const PersonalDetailsForm = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Numeric}
+              control={control}
               label="Total Experience"
               controlName="personalDetails.totalExperience"
               register={register}
@@ -131,10 +133,11 @@ const PersonalDetailsForm = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
-              label="Current Ctc"
+              type={InputType.Numeric}
+              label="Current CTC"
               controlName="personalDetails.currentCtc"
               register={register}
+              control={control}
               errorMessage={
                 ((errors?.personalDetails as any)?.currentCtc
                   ?.message as string) || ""
@@ -145,7 +148,7 @@ const PersonalDetailsForm = () => {
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
-              type="text"
+              type={InputType.Text}
               label="Amount In Words"
               controlName="personalDetails.amountInWords"
               register={register}

@@ -4,6 +4,7 @@ import {
   HIGHEST_QUALIFICATION_OPTION,
   QUALIFICATION_TYPE_OPTION,
 } from "../../constants/technicalEvaluation.constant";
+import { InputType } from "../../enums/Input.enum";
 import Button from "../Button/Button";
 import DropDown from "../DropDown/DropDown";
 import Input from "../Input/Input";
@@ -52,7 +53,7 @@ const EducationalDetailsForm = () => {
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <Input
-            type="text"
+            type={InputType.Text}
             label="Course name"
             controlName="educationalDetails.courseName"
             register={register}
@@ -76,7 +77,8 @@ const EducationalDetailsForm = () => {
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <Input
-            type="text"
+            type={InputType.Numeric}
+            control={control}
             label="Passing Year"
             controlName="educationalDetails.passingYear"
             register={register}
@@ -110,7 +112,7 @@ const EducationalDetailsForm = () => {
           <div key={item.id} className="row">
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
               <Input
-                type="text"
+                type={InputType.Text}
                 label="Other course"
                 controlName={`educationalDetails.otherCourses.${index}.course`}
                 register={register}
@@ -122,7 +124,7 @@ const EducationalDetailsForm = () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
               <Input
-                type="text"
+                type={InputType.Text}
                 label="Course Name"
                 controlName={`educationalDetails.otherCourses.${index}.courseName`}
                 register={register}
@@ -146,7 +148,8 @@ const EducationalDetailsForm = () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
               <Input
-                type="text"
+                type={InputType.Numeric}
+                control={control}
                 label="Passing Year"
                 controlName={`educationalDetails.otherCourses.${index}.passingYear`}
                 register={register}
