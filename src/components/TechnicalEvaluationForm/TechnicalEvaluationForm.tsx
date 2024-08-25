@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -26,7 +26,6 @@ const TechnicalEvaluationForm = () => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [number, setNumber] = useState("");
   const onSubmit = async (data: any) => {
     try {
       setLoading(true);
@@ -37,15 +36,11 @@ const TechnicalEvaluationForm = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    console.log(number, "-askdjhgfjsadgjh");
-  }, [number]);
 
   return (
     <div className="container-fluid p-4 bg-light">
       <div className="mt-1">
         <h1>Technical Evaluation Form</h1>
-
         <div className="container-fluid text-start">
           <h2>Consider all of your Immigration options</h2>
           <p>

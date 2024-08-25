@@ -1,7 +1,9 @@
 import { useCallback, useState } from "react";
+import { FirebaseService } from "../../services/firebase.service";
 import { MediaService } from "../../services/media.service";
 
 const mediaService = new MediaService();
+const firebaseService = new FirebaseService();
 const UploadFile = ({
   allowedType,
   setUrl,
@@ -18,15 +20,9 @@ const UploadFile = ({
     async (file?: File | null) => {
       if (file && !fileUploading) {
         try {
-          setFileUploading(true);
-          const res = await mediaService.generatSignedUrl({
-            fileName: file.name,
-            contentType: file.type,
-          });
-          await mediaService.uploadFile(res?.data?.signedUrl, file);
-          onUploadSuccess(res?.data?.key);
-          setFileUploading(false);
-          setUrl && setUrl("");
+          const res = await firebaseService.uploadFile(file);
+          debugger;
+          console.log(res, "--askhdjgjk");
         } catch (error) {
           console.log(error);
           setFileUploading(false);
@@ -40,7 +36,7 @@ const UploadFile = ({
       <div>
         <div className="form-label">{label}</div>
         <input
-        className="form-control"
+          className="form-control"
           type="file"
           accept={allowedType ? allowedType.join(",") : ""}
           id={"image_file_input"}
