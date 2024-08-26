@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { FirebaseService } from "../../services/firebase.service";
 import { MediaService } from "../../services/media.service";
+import { getExtension } from "../../utils/utils";
 
 const mediaService = new MediaService();
 const firebaseService = new FirebaseService();
@@ -9,20 +10,22 @@ const UploadFile = ({
   setUrl,
   onUploadSuccess,
   label,
+  keyPrefix
 }: {
   allowedType?: string[];
-  setUrl?: Function;
+  setUrl?: any;
   onUploadSuccess: Function;
   label?: string;
+  keyPrefix?: string;
 }) => {
   const [fileUploading, setFileUploading] = useState(false);
   const onFileSelction = useCallback(
     async (file?: File | null) => {
       if (file && !fileUploading) {
         try {
-          const res = await firebaseService.uploadFile(file);
-          debugger;
-          console.log(res, "--askhdjgjk");
+          const key = `${keyPrefix}_${Date.now()}${getExtension(file.name)}`;
+          const res = await firebaseService.uploadFile(file, key);
+          setUrl && setUrl(key);
         } catch (error) {
           console.log(error);
           setFileUploading(false);

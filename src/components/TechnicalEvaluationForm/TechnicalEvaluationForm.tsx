@@ -77,7 +77,7 @@ const TechnicalEvaluationForm = () => {
               id="radio1"
               {...methods.register("evaluationFormType")}
             />
-            <label className="ms-2"  htmlFor="radio1">
+            <label className="ms-2" htmlFor="radio1">
               General Immigration (This form is for professionals and workers.)
             </label>
           </div>
@@ -88,7 +88,7 @@ const TechnicalEvaluationForm = () => {
               value="b"
               {...methods.register("evaluationFormType")}
             />
-            <label className="ms-2"  htmlFor="radio2">
+            <label className="ms-2" htmlFor="radio2">
               Business Immigration (This form is for individuals with management
               experience, or for business owners, having a high net worth.)
             </label>
@@ -158,6 +158,7 @@ const TechnicalEvaluationForm = () => {
             I hereby confirm agree that all the information provided by me is
             correct and accepts all the terms and conditions.
           </label>
+          <br />
           {!methods.watch("confirm") && continueClicked && (
             <span className="text-danger">
               Please tick the box if you want to proceed.
