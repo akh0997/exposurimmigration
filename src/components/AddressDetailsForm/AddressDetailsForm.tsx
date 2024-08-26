@@ -23,6 +23,7 @@ const AddressDetailsForm = () => {
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
                 type={InputType.Text}
+                required={true}
                 label="Address Line 1"
                 controlName="addressDetails.addressLine1"
                 register={register}
@@ -49,6 +50,7 @@ const AddressDetailsForm = () => {
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
                 type={InputType.Text}
+                required={true}
                 label="Nationality"
                 controlName="addressDetails.nationality"
                 register={register}
@@ -60,6 +62,7 @@ const AddressDetailsForm = () => {
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
+                required={true}
                 type={InputType.Text}
                 label="City"
                 controlName="addressDetails.city"
@@ -74,6 +77,7 @@ const AddressDetailsForm = () => {
           <div className="row">
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
+                required={true}
                 type={InputType.Text}
                 label="state"
                 controlName="addressDetails.state"
@@ -87,6 +91,7 @@ const AddressDetailsForm = () => {
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
                 type={InputType.Text}
+                required={true}
                 label="Pincode"
                 controlName="addressDetails.pincode"
                 register={register}
@@ -101,6 +106,7 @@ const AddressDetailsForm = () => {
             <div className="col-lg-6 col-md-6 col-sm-12">
               <Input
                 type={InputType.Text}
+                required={true}
                 label="Country"
                 controlName="addressDetails.country"
                 register={register}

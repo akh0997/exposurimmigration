@@ -29,6 +29,7 @@ const FamilyDetailsForm = () => {
         <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6">
           <DropDown
             options={MARRIAGE_STATUS_OPTION}
+            required={true}
             label="Marraige Status"
             controlName="familyDetails.marraigeStatus"
             control={control}
@@ -115,6 +116,7 @@ const FamilyDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             {" "}
             <DropDown
+              required={true}
               options={YES_NO_OPTION}
               label="Relative in country"
               controlName="familyDetails.relativeInCountry"

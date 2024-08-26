@@ -4,7 +4,10 @@ import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { CONSULTANT_OPTIONS } from "../../constants/technicalEvaluation.constant";
+import {
+  CONSULTANT_OPTIONS,
+  COUNTRY_CODES,
+} from "../../constants/technicalEvaluation.constant";
 import { FirebaseService } from "../../services/firebase.service";
 import { technicalEvaluationFormSchema } from "../../validation/technicalEvaluationForm.schema";
 import AddressDetailsForm from "../AddressDetailsForm/AddressDetailsForm";
@@ -22,15 +25,28 @@ const TechnicalEvaluationForm = () => {
   }>({
     resolver: yupResolver(technicalEvaluationFormSchema),
     mode: "onChange",
+    defaultValues: {
+      personalDetails: {
+        countryCode: COUNTRY_CODES.find((el) => el.countryCode === "IN"),
+      },
+    },
   });
 
   const [loading, setLoading] = useState(false);
+  const [continueClicked, setContinueClicked] = useState(false);
   const navigate = useNavigate();
   const onSubmit = async (data: any) => {
     try {
+      if (!methods.watch("confirm")) {
+        setContinueClicked(true);
+        return;
+      }
       setLoading(true);
       const res = await fireBaseService.addRecord("evaluationForm", data);
-      toast.success(`Successfully!!`);
+      toast.success(`Form Submitted Successfully!!`);
+      methods.reset();
+      setContinueClicked(false);
+      navigate("/success");
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -41,6 +57,7 @@ const TechnicalEvaluationForm = () => {
     <div className="container-fluid p-4 bg-light">
       <div className="mt-1">
         <h1>Technical Evaluation Form</h1>
+
         <div className="container-fluid text-start">
           <h2>Consider all of your Immigration options</h2>
           <p>
@@ -57,19 +74,21 @@ const TechnicalEvaluationForm = () => {
             <input
               type="radio"
               value="a"
+              id="radio1"
               {...methods.register("evaluationFormType")}
             />
-            <label className="ms-2">
+            <label className="ms-2"  htmlFor="radio1">
               General Immigration (This form is for professionals and workers.)
             </label>
           </div>
           <div className="m-2">
             <input
               type="radio"
+              id="radio2"
               value="b"
               {...methods.register("evaluationFormType")}
             />
-            <label className="ms-2">
+            <label className="ms-2"  htmlFor="radio2">
               Business Immigration (This form is for individuals with management
               experience, or for business owners, having a high net worth.)
             </label>
@@ -77,10 +96,11 @@ const TechnicalEvaluationForm = () => {
           <div className="m-2">
             <input
               type="radio"
+              id="radio3"
               value="c"
               {...methods.register("evaluationFormType")}
             />
-            <label className="ms-2">
+            <label className="ms-2" htmlFor="radio3">
               Family Sponsorship (This form is for sponsorship of a
               Spouse/Common-Law Partner and/or Dependent Children.)
             </label>
@@ -128,12 +148,21 @@ const TechnicalEvaluationForm = () => {
           <input
             className="form-check-input"
             type="checkbox"
+            id="confirm_checkbox"
             {...methods.register("confirm")}
           />
-          <label className="form-check-label fw-bold ">
+          <label
+            className="form-check-label fw-bold "
+            htmlFor="confirm_checkbox"
+          >
             I hereby confirm agree that all the information provided by me is
             correct and accepts all the terms and conditions.
           </label>
+          {!methods.watch("confirm") && continueClicked && (
+            <span className="text-danger">
+              Please tick the box if you want to proceed.
+            </span>
+          )}
         </div>
         <div className="my-5">
           <Button
@@ -141,7 +170,7 @@ const TechnicalEvaluationForm = () => {
             label="Continue"
             disabled={loading}
             buttonClass="btn btn-primary"
-            onClick={() => console.log("jhsdagf---", methods.formState.errors)}
+            loading={loading}
           />
         </div>
       </form>

@@ -7,6 +7,7 @@ const DropDown = ({
   errorMessage,
   customClass,
   dropDownClass,
+  required,
 }: {
   options: { value: string; label: string; icon?: string }[];
   control: any;
@@ -15,10 +16,16 @@ const DropDown = ({
   errorMessage?: string;
   customClass?: string;
   dropDownClass?: string;
+  required?: boolean;
 }) => {
   return (
     <div className={`text-start ${customClass}`}>
-      {label && <label className="form-label">{label}</label>}
+      {label && (
+        <label className="form-label">
+          {label}
+           {required && <span className="text-danger"> *</span>}
+        </label>
+      )}
       <Controller
         control={control}
         name={controlName}

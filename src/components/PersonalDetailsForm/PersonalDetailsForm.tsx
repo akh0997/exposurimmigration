@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { COUNTRY_CODE } from "../../constants/technicalEvaluation.constant";
+import { COUNTRY_CODES } from "../../constants/technicalEvaluation.constant";
 import { InputType } from "../../enums/Input.enum";
-import DropDown from "../DropDown/DropDown";
+import CountryDropDown from "../CountryDropDown/CountryDropDown";
 import Input from "../Input/Input";
-import style from "./PersonalDetailsForm.module.scss";
 const PersonalDetailsForm = () => {
   const {
     formState: { errors, isValid },
@@ -14,6 +14,7 @@ const PersonalDetailsForm = () => {
     watch,
     setValue,
   } = useFormContext();
+
   return (
     <div className="container-fluid text-start mt-2">
       <div>
@@ -24,6 +25,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Text}
+              required={true}
               label="First Name"
               controlName="personalDetails.firstName"
               register={register}
@@ -36,6 +38,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Text}
+              required={true}
               label="Last Name"
               controlName="personalDetails.lastName"
               register={register}
@@ -50,6 +53,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Date}
+              required={true}
               label="Date Of Birth"
               controlName="personalDetails.dateOfBirth"
               register={register}
@@ -61,33 +65,40 @@ const PersonalDetailsForm = () => {
           </div>
           <div className="col-lg-6 col-md-6 col-sm-12">
             <div className="row">
-              <label className="form-label">Contact</label>
-              <div className="col-lg-3 col-md-4 col-sm-2 pe-0 rounded-start">
-                <DropDown
-                  options={COUNTRY_CODE}
-                  label=""
-                  controlName="personalDetails.countryCode"
-                  control={control}
-                  dropDownClass={`${style.no_border_radius_right}`}
-                  errorMessage={
-                    ((errors?.familyDetails as any)?.relativeInCountry
-                      ?.message as string) || ""
-                  }
-                ></DropDown>
-              </div>
-              <div className="col-lg-9 col-md-8 col-sm-10 ps-0 rounded-end">
-                <Input
-                  type={InputType.Text}
-                  label=""
-                  controlName="personalDetails.phoneNo"
-                  customClass={`${style.no_border_radius_left}`}
-                  register={register}
-                  errorMessage={
-                    ((errors?.personalDetails as any)?.phoneNo
-                      ?.message as string) || ""
-                  }
+              <label className="form-label">
+                Contact <span className="text-danger">*</span>
+              </label>
+
+              <div className="col-lg-4 col-md-4 col-sm-4">
+                <CountryDropDown
+                  onOptionClick={setValue}
+                  value={watch("personalDetails.countryCode")}
                 />
               </div>
+              <div className="col-lg-8 col-md-8 col-sm-8">
+                <Input
+                  type={InputType.Numeric}
+                  control={control}
+                  label=""
+                  controlName="personalDetails.phoneNo"
+                  customClass={``}
+                  register={register}
+                />
+              </div>
+              {(errors?.personalDetails as any)?.countryCode &&
+                !(errors?.personalDetails as any)?.phoneNo && (
+                  <span className="text-danger">
+                    {
+                      (errors?.personalDetails as any)?.countryCode
+                        ?.message as string
+                    }
+                  </span>
+                )}
+              {(errors?.personalDetails as any)?.phoneNo && (
+                <span className="text-danger">
+                  {(errors?.personalDetails as any)?.phoneNo?.message as string}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -95,6 +106,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Text}
+              required={true}
               label="Father Name"
               controlName="personalDetails.fatherName"
               register={register}
@@ -107,6 +119,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Text}
+              required={true}
               label="Email"
               controlName="personalDetails.email"
               register={register}
@@ -121,6 +134,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Numeric}
+              required={true}
               control={control}
               label="Total Experience"
               controlName="personalDetails.totalExperience"
@@ -134,6 +148,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Numeric}
+              required={true}
               label="Current CTC"
               controlName="personalDetails.currentCtc"
               register={register}
@@ -149,6 +164,7 @@ const PersonalDetailsForm = () => {
           <div className="col-lg-6 col-md-6 col-sm-12">
             <Input
               type={InputType.Text}
+              required={true}
               label="Amount In Words"
               controlName="personalDetails.amountInWords"
               register={register}

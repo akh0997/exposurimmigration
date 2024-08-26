@@ -34,6 +34,7 @@ const ExperienceDetailsForm = () => {
         <div className="row">
           <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <Input
+              required={true}
               type="text"
               label="Current Designation"
               controlName="experienceDetails.currentDesignation"
@@ -47,6 +48,7 @@ const ExperienceDetailsForm = () => {
           <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <Input
               type="text"
+              required={true}
               label="Current Year"
               controlName="experienceDetails.currentYear"
               register={register}
@@ -59,6 +61,7 @@ const ExperienceDetailsForm = () => {
           <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <Input
               type="text"
+              required={true}
               label="Current Months"
               controlName="experienceDetails.currentMonths"
               register={register}

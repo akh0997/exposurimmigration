@@ -41,6 +41,7 @@ const EducationalDetailsForm = () => {
       <div className="row">
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <DropDown
+            required={true}
             options={HIGHEST_QUALIFICATION_OPTION}
             label="Highest Qualification"
             controlName="educationalDetails.highestQualification"
@@ -54,6 +55,7 @@ const EducationalDetailsForm = () => {
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <Input
             type={InputType.Text}
+            required={true}
             label="Course name"
             controlName="educationalDetails.courseName"
             register={register}
@@ -66,6 +68,7 @@ const EducationalDetailsForm = () => {
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <DropDown
             options={QUALIFICATION_TYPE_OPTION}
+            required={true}
             label="Qualification Type"
             controlName="educationalDetails.qualificationType"
             control={control}
@@ -78,6 +81,7 @@ const EducationalDetailsForm = () => {
         <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
           <Input
             type={InputType.Numeric}
+            required={true}
             control={control}
             label="Passing Year"
             controlName="educationalDetails.passingYear"

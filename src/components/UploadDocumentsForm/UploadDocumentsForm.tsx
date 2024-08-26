@@ -13,6 +13,9 @@ const UploadDocumentsForm = () => {
             onUploadSuccess={handleUploadSuccess}
             label="Updated Resume"
           />
+          <span className="text-danger">
+            (Files accepted: .pdf, .doc/docx, .jpg, .png)
+          </span>
         </div>
         <div className="col-lg-6 col-md-6 col-sm-12">
           <UploadFile
@@ -20,6 +23,9 @@ const UploadDocumentsForm = () => {
             onUploadSuccess={handleUploadSuccess}
             label="Highest Qualification Document"
           />
+          <span className="text-danger">
+            (Files accepted: .pdf, .doc/docx, .jpg, .png)
+          </span>
         </div>
       </div>
       <div className="row">
@@ -29,6 +35,11 @@ const UploadDocumentsForm = () => {
             onUploadSuccess={handleUploadSuccess}
             label="Identity Proof"
           />
+          <span className="text-danger fw-bold">(Pan Card, Aadhar Card, Voter ID)</span>
+          <br />
+          <span className="text-danger">
+            (Files accepted: .pdf, .doc/docx, .jpg, .png)
+          </span>
         </div>
         <div className="col-lg-6 col-md-6 col-sm-12">
           <UploadFile
@@ -36,6 +47,9 @@ const UploadDocumentsForm = () => {
             onUploadSuccess={handleUploadSuccess}
             label="Passport"
           />
+          <span className="text-danger">
+            (Files accepted: .pdf, .doc/docx, .jpg, .png)
+          </span>
         </div>
       </div>
     </div>

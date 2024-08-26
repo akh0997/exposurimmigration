@@ -10,6 +10,7 @@ const Input = ({
   errorMessage,
   customClass,
   control,
+  required,
 }: {
   type: string;
   register: UseFormRegister<FieldValues>;
@@ -19,6 +20,7 @@ const Input = ({
   controlName: string;
   customClass?: string;
   control?: any;
+  required?: boolean;
 }) => {
   const getInputByType = () => {
     switch (type) {
@@ -68,15 +70,13 @@ const Input = ({
   };
 
   return (
-    <div className={`text-start ${customClass}`}>
-      {label && <label className="form-label">{label}</label>}
-      <div className="mb-3">
-        {/* <input
-          className="form-control"
-          type={type}
-          {...register(controlName)}
-          placeholder={placeholder}
-        /> */}
+    <div className={`text-start mb-3 ${customClass}`}>
+      {label && (
+        <label className="form-label">
+          {label} {required && <span className="text-danger">*</span>}
+        </label>
+      )}
+      <div className="">
         {getInputByType()}
         {type === "password" && <span className={`text-danger`}> </span>}
       </div>

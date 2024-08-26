@@ -3,6 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import Success from "../pages/Success";
 import TechnicalEvaluation from "../pages/TechnicalEvaluation";
 
 const RouterPath = () => {
@@ -10,6 +11,10 @@ const RouterPath = () => {
     {
       path: "/",
       element: <TechnicalEvaluation></TechnicalEvaluation>,
+    },
+    {
+      path: "/success",
+      element: <Success></Success>,
     },
     {
       path: "*",

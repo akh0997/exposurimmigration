@@ -10,7 +10,7 @@ export const technicalEvaluationFormSchema: ObjectSchema<{ [x: string]: any }> =
       lastName: yup.string().required("Please enter Last name"),
       dateOfBirth: yup.string().required("Please enter Date of Birth"),
       phoneNo: yup.string().required("Please enter Contact Number"),
-      countryCode: yup.string().required("Please select Country Code"),
+      countryCode: yup.object().required("Please select Country Code"),
       fatherName: yup.string().required("Please enter Father Name"),
       email: yup
         .string()
@@ -22,7 +22,7 @@ export const technicalEvaluationFormSchema: ObjectSchema<{ [x: string]: any }> =
     }),
     addressDetails: yup.object({
       addressLine1: yup.string().required("Please enter Address Line1"),
-      addressLine2: yup.string().required("Please enter Address Line 2"),
+      addressLine2: yup.string(),
       nationality: yup.string().required("Please enter Nationality"),
       city: yup.string().required("Please enter City"),
       state: yup.string().required("Please enter State"),
@@ -83,5 +83,5 @@ export const technicalEvaluationFormSchema: ObjectSchema<{ [x: string]: any }> =
       identityProof: yup.string(),
       passport: yup.string(),
     }),
-    confirm: yup.boolean(),
+    confirm: yup.boolean().required('lashfkasgdkhjf'),
   });
