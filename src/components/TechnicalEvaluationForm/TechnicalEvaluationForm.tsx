@@ -137,7 +137,7 @@ const TechnicalEvaluationForm = () => {
         <div className="mt-4">
           <h4>Consider all of your Immigration options.</h4>
           <p>
-            The personal information you provide to the Exposure Immigration
+            The personal information you provide to the Ivaas Outsourcing
             Firm is secure and is collected with the sole purpose of assessing
             your potential for immigration to the specified country under the
             current immigration selection criteria. We will respond to you only
